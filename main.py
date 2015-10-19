@@ -6,6 +6,7 @@ from PIL import Image as Im
 rand = lambda: random.random() - 0.5  # from -0.5 to 0.5)
 sigmoid = lambda (x): 1.0 / (1.0 + np.exp(-x))
 grad_sigmoid = lambda (x): sigmoid(x) * (1 - sigmoid(x))
+signum = lambda (x): int(x >= 0)
 
 
 class NN(object):
@@ -33,12 +34,11 @@ class NN(object):
         self.clean_neurons()
         self.neurons[0] = dig_data[:]
         for l_id, layer in enumerate(self.neurons):
-            print self.neurons[l_id]
             if l_id == self.neurons.__len__() - 1:
-                break
+                return [ signum(i * self.weights[l_id][no]) for no in self.neurons[3]]
             for idx, i in enumerate(self.neurons[l_id]):
                 for idx2, n in enumerate(self.neurons[l_id + 1]):
-                    self.neurons[l_id + 1][idx2] += i * sigmoid(self.weights[l_id][idx][idx2])
+                    self.neurons[l_id + 1][idx2] += signum(i * self.weights[l_id][idx][idx2])
 
 
 def ldigits():
@@ -47,14 +47,13 @@ def ldigits():
 
 
 nn = NN(77, 10, 2)
-print nn.weights[3][9]
 
 digits = ldigits();
 nn.forward(digits[8], 8)
 nn.forward(digits[8], 8)
 
 
-
+print nn.forward(digits[8], 8)
 
 print nn.neurons[3]
 
