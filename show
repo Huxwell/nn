@@ -1,0 +1,9 @@
+# import numpy as np
+# import matplotlib.pyplot as plt
+# from PIL import Image
+# im=plt.imread("data/5.bmp")
+# np.array(filter(lambda x: x >= 127, im[0][0]))
+# print im[0]
+# plt.imshow(im)
+# plt.show()
+# print [p[0]+p[1]+p[2] <= 127 *3 for p in list(Im.open("data/" + [f for f in os.listdir("data") if ".bmp" in f][1]).getdata())]
