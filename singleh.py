@@ -36,8 +36,10 @@ class NN(object):
         ws_o_trans = zip(*self.ws_o)
         err_h = [grad_sigmoid(h) * sum([e * w for e, w in izip(err_o,ws_o_trans[h_idx])]) for h_idx, h in enumerate(self.hidd)]
         print err_h
-
-
+        print self.ws_h
+        self.ws_o = [[w * self.learn * e * signum(net) for w, net in izip(w_n,self.hidd)] for w_n, e in izip(self.ws_o,err_o)]
+        self.ws_h = [[w * self.learn * e * signum(x) for w, x in izip(w_n,xes)] for w_n, e in izip(self.ws_h,err_h)]
+        print self.ws_h
 """
 class Neuron(object):
     signal = None
