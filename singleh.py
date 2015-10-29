@@ -15,7 +15,7 @@ class NN(object):
     ws_hidden = [] # 2 dims
     ws_out = [] # 2 dims
 
-    def __init__(self, n_i=77, n_o=10, n_h=44, learn=0.5):
+    def __init__(self, n_i=77, n_o=10, n_h=44, learn=0.1):
         self.learn = learn
         self.ws_hidden = [[rand() for i in xrange(n_i)] for h in xrange(n_h)]
         self.ws_out = [[rand() for i in xrange(n_h)] for h in xrange(n_o)]
