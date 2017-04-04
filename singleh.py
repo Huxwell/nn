@@ -26,18 +26,13 @@ class NN(object):
         outs = [sigmoid(net) for net in net_out]
 
         prop_outs = [1 if i==y else 0 for i in xrange(10)]
-        # print prop_outs
-        # print net_out
         err_o = [(proper_out - sigmoid(net)) * grad_sigmoid(net) for net, proper_out in izip(net_out, prop_outs)]
-        # print err_o
         self.error = sum([e**2 for e in err_o]) *0.5
         print self.error
         ws_out_trans = zip(*self.ws_out)
         err_h = [grad_sigmoid(net) * sum([e * w for e, w in izip(err_o, ws)]) for ws, net in izip(ws_out_trans, net_hidden)]
         self.ws_out = [[w + self.learn * e * sigmoid(net) for w, net in izip(w_n, net_hidden)] for w_n, e in izip(self.ws_out, err_o)]
         self.ws_hidden = [[w + self.learn * e * x for w, x in izip(w_n, xes)] for w_n, e in izip(self.ws_hidden, err_h)]
-        # print [round(f,2) for f in outs]
-
         return outs
 
 
